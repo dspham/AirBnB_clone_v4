@@ -10,11 +10,7 @@ $(document).ready(function () {
     });
 });
 
-$.get('http://0.0.0.0:5001/api/v1/status/', function (data, checkStatus) {
-    // console.log(checkStatus);
-    // console.log(data);
-    // console.log(this);
-    // console.log(data.status);
+$.get('http://0.0.0.0:5001/api/v1/status/', function (data) {
     if (data.status === 'OK') {
         $('div#api_status').addClass('available');
     }
