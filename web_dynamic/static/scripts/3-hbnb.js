@@ -53,7 +53,7 @@ $.ajax({
       </div>
       </div>
       <div class="user">
-      <strong> Owner: unknnhnhn </strong>
+      <strong> Owner: ${v.user.first_name} ${v.user.last_name}</strong>
       </div>
       <div class="description">
       ${v.description}
