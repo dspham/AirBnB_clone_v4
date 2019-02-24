@@ -15,7 +15,7 @@
     <!-- JS imports -->
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="../static/scripts/3-hbnb.js?{ ca{che_id }}"></script>
+    <script type="text/javascript" src="../static/scripts/3-hbnb.js?{{ cache_id }}"></script>
 
     <!-- **********************
 	 CSS styles
@@ -94,22 +94,14 @@
 
             <section class="places">
                 <h1>Places</h1>
-                    <!-- **********************
-		 USER
-		 **********************  -->
 
-                    <div class="user">
+                <!-- **********************
+	     BEGIN 1 PLACE
+	     ********************** -->
 
-                        <strong>Owner: {{ users[place.user_id] }}</strong>
+                {% for place in places|sort(attribute='name') %}
 
-                    </div>
-                    <div class="description">
-
-                        {{ place.description }}
-
-                    </div>
-
-                </article> <!-- End 1 PLACE Article -->
+                {% endfor %}
 
             </section>
         </div>
@@ -121,5 +113,3 @@
         Holberton School
     </footer>
 </body>
-
-</html>
