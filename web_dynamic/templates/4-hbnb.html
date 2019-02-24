@@ -89,7 +89,7 @@
 	       SEARCH BUTTON
 	       ********************** -->
 
-                <button>Search</button>
+                <button id="search_btn">Search</button>
             </section>
 
             <section class="places">
@@ -99,9 +99,6 @@
 	     BEGIN 1 PLACE
 	     ********************** -->
 
-                {% for place in places|sort(attribute='name') %}
-
-                {% endfor %}
 
             </section>
         </div>
