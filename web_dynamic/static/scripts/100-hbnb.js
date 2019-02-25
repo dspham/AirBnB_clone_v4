@@ -2,8 +2,21 @@ $(document).ready(function () {
   let statesObj = {};
   $('.states_h2 input:checkbox').change(function () {
     if (this.checked) {
-      statesObj[$(this).data('id')] = $(this).data('name');
+      statesObj[$(this).data('id')] = ' ' + $(this).data('name');
+      let cities = $(this).parent().next('ul').find('.cities_li input:checkbox');
+      cities.each((idx, ele) => {
+        ele.checked = true;
+        if (statesObj[$(ele).data('id')]){
+          delete statesObj[$(ele).data('id')];
+        };
+      });
     } else {
+        let cities = $(this).parent().next('ul').find('.cities_li input:checkbox');
+        cities.each((idx, ele) => {
+          if (ele.checked){
+            statesObj[$(ele).data('id')] = ' ' + $(ele).data('name');
+          }
+        });
       delete statesObj[$(this).data('id')];
     }
     $('DIV.locations h4').text(Object.values(statesObj));
@@ -11,18 +24,31 @@ $(document).ready(function () {
 
   $('.cities_li input:checkbox').change(function () {
     if (this.checked) {
-      statesObj[$(this).data('id')] = $(this).data('name');
+      let boxie = $(this).parent().parent().find('.cities_li input:checkbox').length;
+      let checked = $(this).parent().parent().find('.cities_li input:checked').length;
+      if (boxie === checked) {
+        let state_check = $(this).parent().parent().parent().find('.states_h2 input:checkbox')[0];
+        state_check.checked = true;
+        $(state_check).trigger('change');
+      } else {
+        statesObj[$(this).data('id')] = ' ' + $(this).data('name');
+      }
+
     } else {
+      let state_check = $(this).parent().parent().parent().find('.states_h2 input:checkbox')[0];
+      if (state_check.checked){
+        state_check.checked = false;
+        $(state_check).trigger('change');
+      };
       delete statesObj[$(this).data('id')];
     }
     $('DIV.locations h4').text(Object.values(statesObj));
   });
 
-
   let amenitiesObj = {};
   $('.amenities input:checkbox').change(function () {
     if (this.checked) {
-      amenitiesObj[$(this).data('id')] = $(this).data('name');
+      amenitiesObj[$(this).data('id')] = ' ' + $(this).data('name');
     } else {
       delete amenitiesObj[$(this).data('id')];
     }
@@ -89,7 +115,7 @@ $(document).ready(function () {
     let res = {};
     let amenities = [];
     let cities = [];
-    let states = [];
+    // let states = [];
     $('.amenities li input').each((idx, elem) => {
       if (elem.checked) {
         amenities.push(elem.dataset.id);
@@ -106,12 +132,12 @@ $(document).ready(function () {
       res['cities'] = cities;
     });
 
-    $('.states_h2 input').each((idx, elem) => {
-      if (elem.checked) {
-        states.push(elem.dataset.id);
-      }
-      res['states'] = states;
-    });
+    // $('.states_h2 input').each((idx, elem) => {
+    //   if (elem.checked) {
+    //     states.push(elem.dataset.id);
+    //   }
+    //   res['states'] = states;
+    // });
 
     placeSearch(res);
   });
