@@ -1,10 +1,20 @@
 $(document).ready(function () {
+  let statesObj = {};
+  $('.states_h2 input:checkbox').change(function () {
+    if (this.checked) {
+      statesObj[$(this).data('id')] = $(this).data('name');
+    } else {
+      delete statesObj[$(this).data('id')];
+    }
+    $('DIV.locations h4').text(Object.values(statesObj));
+  });
+
   let amenitiesObj = {};
-  $('input:checkbox').change(function () {
+  $('.amenities input:checkbox').change(function () {
     if (this.checked) {
       amenitiesObj[$(this).data('id')] = $(this).data('name');
     } else {
-      delete [$(this).data('id')];
+      delete amenitiesObj[$(this).data('id')];
     }
     $('DIV.amenities h4').text(Object.values(amenitiesObj));
   });
