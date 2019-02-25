@@ -1,6 +1,8 @@
 $(document).ready(function () {
   let statesObj = {};
-  $('.states_h2 input:checkbox').change(function () {
+  let amenitiesObj = {};
+
+  function handleStateCheck () {
     if (this.checked) {
       statesObj[$(this).data('id')] = ' ' + $(this).data('name');
       let cities = $(this).parent().next('ul').find('.cities_li input:checkbox');
@@ -11,57 +13,47 @@ $(document).ready(function () {
         };
       });
     } else {
-        let cities = $(this).parent().next('ul').find('.cities_li input:checkbox');
-        cities.each((idx, ele) => {
-          if (ele.checked){
-            statesObj[$(ele).data('id')] = ' ' + $(ele).data('name');
-          }
-        });
+      let cities = $(this).parent().next('ul').find('.cities_li input:checkbox');
+      cities.each((idx, ele) => {
+        if (ele.checked){
+          statesObj[$(ele).data('id')] = ' ' + $(ele).data('name');
+        }
+      });
       delete statesObj[$(this).data('id')];
     }
     $('DIV.locations h4').text(Object.values(statesObj));
-  });
+  }
 
-  $('.cities_li input:checkbox').change(function () {
+  function handleCityCheck () {
     if (this.checked) {
       let boxie = $(this).parent().parent().find('.cities_li input:checkbox').length;
       let checked = $(this).parent().parent().find('.cities_li input:checked').length;
       if (boxie === checked) {
-        let state_check = $(this).parent().parent().parent().find('.states_h2 input:checkbox')[0];
-        state_check.checked = true;
-        $(state_check).trigger('change');
+        let stateCheck = $(this).parent().parent().parent().find('.states_h2 input:checkbox')[0];
+        stateCheck.checked = true;
+        $(stateCheck).trigger('change');
       } else {
         statesObj[$(this).data('id')] = ' ' + $(this).data('name');
       }
-
     } else {
-      let state_check = $(this).parent().parent().parent().find('.states_h2 input:checkbox')[0];
-      if (state_check.checked){
-        state_check.checked = false;
-        $(state_check).trigger('change');
+      let stateCheck = $(this).parent().parent().parent().find('.states_h2 input:checkbox')[0];
+      if (stateCheck.checked) {
+        stateCheck.checked = false;
+        $(stateCheck).trigger('change');
       };
       delete statesObj[$(this).data('id')];
     }
     $('DIV.locations h4').text(Object.values(statesObj));
-  });
+  }
 
-  let amenitiesObj = {};
-  $('.amenities input:checkbox').change(function () {
+  function handleAmenitiesCheck () {
     if (this.checked) {
       amenitiesObj[$(this).data('id')] = ' ' + $(this).data('name');
     } else {
       delete amenitiesObj[$(this).data('id')];
     }
     $('DIV.amenities h4').text(Object.values(amenitiesObj));
-  });
-
-  $.get('http://0.0.0.0:5001/api/v1/status/', function (data) {
-    if (data.status === 'OK') {
-      $('div#api_status').addClass('available');
-    } else {
-      $('div#api_status').removeClass('available');
-    }
-  });
+  }
 
   function placeSearch (postdata) {
     $('.places_articles').remove();
@@ -109,13 +101,10 @@ $(document).ready(function () {
     });
   }
 
-  placeSearch({});
-
-  $('#search_btn').click((el) => {
+  function handleSearchClick (el) {
     let res = {};
     let amenities = [];
     let cities = [];
-    // let states = [];
     $('.amenities li input').each((idx, elem) => {
       if (elem.checked) {
         amenities.push(elem.dataset.id);
@@ -131,14 +120,20 @@ $(document).ready(function () {
       }
       res['cities'] = cities;
     });
-
-    // $('.states_h2 input').each((idx, elem) => {
-    //   if (elem.checked) {
-    //     states.push(elem.dataset.id);
-    //   }
-    //   res['states'] = states;
-    // });
-
     placeSearch(res);
+  }
+
+  $.get('http://0.0.0.0:5001/api/v1/status/', function (data) {
+    if (data.status === 'OK') {
+      $('div#api_status').addClass('available');
+    } else {
+      $('div#api_status').removeClass('available');
+    }
   });
+
+  placeSearch({});
+  $('.states_h2 input:checkbox').change(handleStateCheck);
+  $('.cities_li input:checkbox').change(handleCityCheck);
+  $('.amenities input:checkbox').change(handleAmenitiesCheck);
+  $('#search_btn').click(handleSearchClick);
 });
