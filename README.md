@@ -217,6 +217,8 @@ github repo
 * Kimberly Wong, [kjowong](https://github.com/kjowong) | [@kjowong](https://twitter.com/kjowong) | [kjowong@gmail.com](kjowong@gmail.com)
 * Carrie Ybay, [hicarrie](https://github.com/hicarrie) | [@hicarrie_](https://twitter.com/hicarrie_)
 * Jared Heck, [jarehec](https://github.com/jarehec) | [@jarehec](https://twitter.com/jarehec)
+* Alex (Marius) Farioletti, [thrownblown](https://github.com/thrownblown) | [@thrownblown](https://twitter.com/thrownblown) | [gsfnyc@gmail.com](gsfnyc@gmail.com)
+* Dennis Pham, [dspham](https://github.com/dspham) | [@grepdennis](https://twitter.com/dspham) | [dsvpham@gmail.com](dsvpham@gmail.com)
 
 ## License
 
