@@ -66,14 +66,33 @@ $(document).ready(function () {
   placeSearch({});
 
   $('#search_btn').click((el) => {
-    let res = [];
+    let res = {};
+    let amenities = [];
+    let cities = [];
+    let states = [];
     $('.amenities li input').each((idx, elem) => {
       if (elem.checked) {
-        res.push(elem.dataset.id);
+        amenities.push(elem.dataset.id);
+      }
+      res['amenities'] = amenities;
+      if (amenities.length) {
       }
     });
-    if (res.length) {
-      placeSearch({ amenities: res });
-    }
+
+    $('.cities_li input').each((idx, elem) => {
+      if (elem.checked) {
+        cities.push(elem.dataset.id);
+      }
+      res['cities'] = cities;
+    });
+
+    $('.states_h2 input').each((idx, elem) => {
+      if (elem.checked) {
+        states.push(elem.dataset.id);
+      }
+      res['states'] = states;
+    });
+
+    placeSearch(res);
   });
 });
