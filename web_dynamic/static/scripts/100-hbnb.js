@@ -9,6 +9,16 @@ $(document).ready(function () {
     $('DIV.locations h4').text(Object.values(statesObj));
   });
 
+  $('.cities_li input:checkbox').change(function () {
+    if (this.checked) {
+      statesObj[$(this).data('id')] = $(this).data('name');
+    } else {
+      delete statesObj[$(this).data('id')];
+    }
+    $('DIV.locations h4').text(Object.values(statesObj));
+  });
+
+
   let amenitiesObj = {};
   $('.amenities input:checkbox').change(function () {
     if (this.checked) {
