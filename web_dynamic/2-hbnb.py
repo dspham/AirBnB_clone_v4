@@ -2,7 +2,7 @@
 """
 Flask App that integrates with AirBnB static HTML Template
 """
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template
 from models import storage
 import uuid
 
@@ -41,6 +41,7 @@ def hbnb_filters(the_id=None):
                            places=places,
                            users=users,
                            cache_id=str(uuid.uuid4()))
+
 
 if __name__ == "__main__":
     """
