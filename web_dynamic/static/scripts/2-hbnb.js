@@ -4,7 +4,7 @@ $(document).ready(function () {
         if (this.checked) {
             amenitiesObj[$(this).data('id')] = $(this).data('name');
         } else {
-            delete[$(this).data('id')];
+            delete amenitiesObj[$(this).data('id')];
         }
         $('DIV.amenities h4').text(Object.values(amenitiesObj));
     });
