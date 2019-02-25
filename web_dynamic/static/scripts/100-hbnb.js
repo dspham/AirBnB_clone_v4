@@ -18,7 +18,6 @@ $(document).ready(function () {
     $('DIV.locations h4').text(Object.values(statesObj));
   });
 
-
   let amenitiesObj = {};
   $('.amenities input:checkbox').change(function () {
     if (this.checked) {
