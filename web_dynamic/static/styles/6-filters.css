@@ -5,6 +5,7 @@
 
 .container .filters {
 	height: 70px;
+	/* height: 100px; */
 	background-color: #FFFFFF;
 	width: 100%;
 	border: 1px solid #DDDDDD;
@@ -23,8 +24,13 @@
 }
 
 .container .filters .amenities {
-	width: 25%;
+	/* width: 25%; */
+	width: 50%;
 }
+
+/* .container .filters .amenities h4 {
+	word-wrap:break-word;
+} */
 
 /* .container .filters .amenities input {	
 	margin-right: 100px;
@@ -63,6 +69,15 @@
 	font-size: 14px;
 	margin: 7px 0 3px 40px;
 }
+
+/* .container .filters .amenities h4 {
+	white-space: nowrap;
+	overflow: hidden;
+	max-width: 300px;
+	border-left:1em solid transparent;
+	border-right:1em solid transparent;
+	text-overflow: ellipsis;
+} */
 
 /**
  * ------ POPOVER
