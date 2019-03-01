@@ -8,14 +8,14 @@ $(document).ready(function () {
       let cities = $(this).parent().next('ul').find('.cities_li input:checkbox');
       cities.each((idx, ele) => {
         ele.checked = true;
-        if (statesObj[$(ele).data('id')]){
+        if (statesObj[$(ele).data('id')]) {
           delete statesObj[$(ele).data('id')];
-        };
+        }
       });
     } else {
       let cities = $(this).parent().next('ul').find('.cities_li input:checkbox');
       cities.each((idx, ele) => {
-        if (ele.checked){
+        if (ele.checked) {
           statesObj[$(ele).data('id')] = ' ' + $(ele).data('name');
         }
       });
@@ -40,7 +40,7 @@ $(document).ready(function () {
       if (stateCheck.checked) {
         stateCheck.checked = false;
         $(stateCheck).trigger('change');
-      };
+      }
       delete statesObj[$(this).data('id')];
     }
     $('DIV.locations h4').text(Object.values(statesObj));

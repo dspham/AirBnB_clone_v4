@@ -2,7 +2,7 @@ $(document).ready(function () {
   let amenitiesObj = {};
   $('input:checkbox').change(function () {
     if (this.checked) {
-      amenitiesObj[$(this).data('id')] = $(this).data('name');
+      amenitiesObj[$(this).data('id')] = ' ' + $(this).data('name');
     } else {
       delete amenitiesObj[$(this).data('id')];
     }
