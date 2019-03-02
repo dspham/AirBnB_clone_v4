@@ -16,12 +16,24 @@ def reviews_per_place(place_id=None):
     """
     place_obj = storage.get('Place', place_id)
 
+    # if request.method == 'GET':
+    #     if place_obj is None:
+    #         abort(404, 'Not found')
+    #     all_reviews = storage.all('Review')
+    #     place_reviews = [obj.to_json() for obj in all_reviews.values()
+    #                      if obj.place_id == place_id]
+    #     return jsonify(place_reviews)
+
     if request.method == 'GET':
         if place_obj is None:
             abort(404, 'Not found')
         all_reviews = storage.all('Review')
-        place_reviews = [obj.to_json() for obj in all_reviews.values()
-                         if obj.place_id == place_id]
+        place_reviews = []
+        for obj in all_reviews.values():
+            if obj.place_id == place_id:
+                review_json = obj.to_json()
+                review_json['user'] = storage.get('User', obj.user_id).to_json()
+                place_reviews.append(review_json)
         return jsonify(place_reviews)
 
     if request.method == 'POST':

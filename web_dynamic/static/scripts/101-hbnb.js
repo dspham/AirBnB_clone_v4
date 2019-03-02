@@ -2,7 +2,7 @@ $(document).ready(function () {
   let statesObj = {};
   let amenitiesObj = {};
 
-  function handleStateCheck () {
+  function handleStateCheck() {
     if (this.checked) {
       statesObj[$(this).data('id')] = ' ' + $(this).data('name');
       let cities = $(this).parent().next('ul').find('.cities_li input:checkbox');
@@ -24,7 +24,7 @@ $(document).ready(function () {
     $('DIV.locations h4').text(Object.values(statesObj));
   }
 
-  function handleCityCheck () {
+  function handleCityCheck() {
     if (this.checked) {
       let boxie = $(this).parent().parent().find('.cities_li input:checkbox').length;
       let checked = $(this).parent().parent().find('.cities_li input:checked').length;
@@ -46,7 +46,7 @@ $(document).ready(function () {
     $('DIV.locations h4').text(Object.values(statesObj));
   }
 
-  function handleAmenitiesCheck () {
+  function handleAmenitiesCheck() {
     if (this.checked) {
       amenitiesObj[$(this).data('id')] = ' ' + $(this).data('name');
     } else {
@@ -55,7 +55,7 @@ $(document).ready(function () {
     $('DIV.amenities h4').text(Object.values(amenitiesObj));
   }
 
-  function placeSearch (postdata) {
+  function placeSearch(postdata) {
     $('.places_articles').remove();
     $.ajax({
       url: 'http://0.0.0.0:5001/api/v1/places_search/',
@@ -103,7 +103,7 @@ $(document).ready(function () {
             <li>
                 <h3></h3>
                 <p></p>
-                </li>
+            </li>
             </ul>
           </div>
           </article>`).appendTo('.places');
@@ -122,7 +122,7 @@ $(document).ready(function () {
                */
               $(`
                 <li>
-                <h3>${review.user_id}</h3>
+                <h3>${review.user.first_name} ${review.user.last_name}</h3>
                 <p>${review.text}</p> 
                 </li> `).appendTo('#' + ulid);
               // console.log($(this).find('.reviews'));
@@ -133,7 +133,7 @@ $(document).ready(function () {
     });
   }
 
-  function handleSearchClick (el) {
+  function handleSearchClick(el) {
     let res = {};
     let amenities = [];
     let cities = [];
